@@ -1,4 +1,4 @@
-package com.maybank.assessment;
+package com.maybank.assessment.constant;
 
 public class Constants {
 

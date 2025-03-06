@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.maybank.assessment.Constants;
+import com.maybank.assessment.constant.Constants;
 import com.maybank.assessment.dto.AssessmentReqBean;
 import com.maybank.assessment.dto.AssessmentRespBean;
 import com.maybank.assessment.dto.BaseClassWrapper;
