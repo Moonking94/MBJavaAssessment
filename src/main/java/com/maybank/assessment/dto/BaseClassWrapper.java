@@ -1,5 +1,8 @@
 package com.maybank.assessment.dto;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+
 import com.maybank.assessment.constant.Constants;
 
 public class BaseClassWrapper<T> {
@@ -38,16 +41,16 @@ public class BaseClassWrapper<T> {
 	}
 	
 	// to set success
-	public void setResponseSuccess(T responseData) {
+	public void setResponseSuccess(MessageSource messageSource, T responseData) {
 		responseCode = Constants.RESPONSE_CODE_SUCCESS;
-		responseMessage = "success";
+		responseMessage = messageSource.getMessage(Constants.LBL_RESPONSE_CODE + Constants.RESPONSE_CODE_SUCCESS, null, LocaleContextHolder.getLocale());
 		this.responseData = responseData;
 	}
 	
 	// for default error
-	public void setResponseError() {
+	public void setResponseError(MessageSource messageSource) {
 		responseCode = Constants.RESPONSE_CODE_ERROR;
-		responseMessage = "error";
+		responseMessage = messageSource.getMessage(Constants.LBL_RESPONSE_CODE + Constants.RESPONSE_CODE_ERROR, null, LocaleContextHolder.getLocale());
 	}
 	
 	// for custom message with error
