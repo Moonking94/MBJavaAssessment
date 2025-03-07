@@ -12,6 +12,8 @@ public class AssessmentRespBean {
 	
 	private List<AssessmentBean> searchResults;
 	
+	private Long totalCount;
+	
 	public AssessmentRespBean() {
 	}
 
@@ -37,6 +39,14 @@ public class AssessmentRespBean {
 
 	public void setSearchResults(List<AssessmentBean> searchResults) {
 		this.searchResults = searchResults;
+	}
+
+	public Long getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(Long totalCount) {
+		this.totalCount = totalCount;
 	}
 	
 }

@@ -1,10 +1,17 @@
 package com.maybank.assessment.model;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 import com.maybank.assessment.dto.AssessmentBean;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "assessment", schema = "maybank", catalog = "maybank")
@@ -18,17 +25,31 @@ public class AssessmentEntity {
 	@Column(name = "name", length = 150)
 	private String name;
 	
-	@Column(name = "duration")
-	private Integer duration;
+	@Column(name = "age")
+	private Integer age;
+	
+	@Column(name = "address")
+	private String address;
+	
+	@Column(name = "city")
+	private String city;
+	
+	@Column(name = "postcode")
+	private String postcode;
+	
+	@Column(name = "state_id")
+	private Integer stateId;
 	
 	@Column(name = "status", length = 1)
 	private Character status;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created_dt")
-	private Instant createdDt;
+	private LocalDateTime createdDt;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "modified_dt")
-	private Instant modifiedDt;
+	private LocalDateTime modifiedDt;
 	
 	public AssessmentEntity() {
 	}
@@ -49,12 +70,44 @@ public class AssessmentEntity {
 		this.name = name;
 	}
 
-	public Integer getDuration() {
-		return duration;
+	public Integer getAge() {
+		return age;
 	}
 
-	public void setDuration(Integer duration) {
-		this.duration = duration;
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
+	public Integer getStateId() {
+		return stateId;
+	}
+
+	public void setStateId(Integer stateId) {
+		this.stateId = stateId;
 	}
 
 	public Character getStatus() {
@@ -65,26 +118,30 @@ public class AssessmentEntity {
 		this.status = status;
 	}
 
-	public Instant getCreatedDt() {
+	public LocalDateTime getCreatedDt() {
 		return createdDt;
 	}
 
-	public void setCreatedDt(Instant createdDt) {
+	public void setCreatedDt(LocalDateTime createdDt) {
 		this.createdDt = createdDt;
 	}
-	
-	public Instant getModifiedDt() {
+
+	public LocalDateTime getModifiedDt() {
 		return modifiedDt;
 	}
 
-	public void setModifiedDt(Instant modifiedDt) {
+	public void setModifiedDt(LocalDateTime modifiedDt) {
 		this.modifiedDt = modifiedDt;
 	}
 
 	public void toEntity(AssessmentBean bean) {
 		this.id = bean.getId();
 		this.name = bean.getName();
-		this.duration = bean.getDuration();
+		this.age = bean.getAge();
+		this.address = bean.getAddress();
+		this.city = bean.getCity();
+		this.postcode = bean.getPostcode();
+		this.stateId = bean.getStateId();
 		this.status = bean.getStatus();
 		this.createdDt = bean.getCreatedDt();
 		this.modifiedDt = bean.getModifiedDt();

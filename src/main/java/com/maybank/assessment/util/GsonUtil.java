@@ -1,14 +1,14 @@
 package com.maybank.assessment.util;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.maybank.assessment.config.InstantTypeAdapter;
+import com.maybank.assessment.config.LocalDateTimeTypeAdapter;
 
 public class GsonUtil {
     private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
             .create();
 
     public static Gson getGson() {

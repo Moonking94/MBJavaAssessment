@@ -1,6 +1,6 @@
 package com.maybank.assessment.dto;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 import com.maybank.assessment.model.AssessmentEntity;
 
@@ -10,17 +10,38 @@ public class AssessmentBean {
 	
 	private String name;
 	
-	private Integer duration;
+	private Integer age;
+	
+	private String address;
+	
+	private String city;
+	
+	private String postcode;
+	
+	private Integer stateId;
 	
 	private Character status;
 	
-	private Instant createdDt;
+	private LocalDateTime createdDt;
 	
-	private Instant modifiedDt;
+	private LocalDateTime modifiedDt;
 	
 	public AssessmentBean() {
 	}
 
+	public AssessmentBean(Long id, String name, Integer age, String address, String city, String postcode, Integer stateId, Character status, LocalDateTime createdDt, LocalDateTime modifiedDt) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.address = address;
+        this.city = city;
+        this.postcode = postcode;
+        this.stateId = stateId;
+        this.status = status;
+        this.createdDt = createdDt;
+        this.modifiedDt = modifiedDt;
+    }
+	
 	public Long getId() {
 		return id;
 	}
@@ -37,14 +58,46 @@ public class AssessmentBean {
 		this.name = name;
 	}
 
-	public Integer getDuration() {
-		return duration;
+	public Integer getAge() {
+		return age;
 	}
 
-	public void setDuration(Integer duration) {
-		this.duration = duration;
+	public void setAge(Integer age) {
+		this.age = age;
 	}
-	
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
+	public Integer getStateId() {
+		return stateId;
+	}
+
+	public void setStateId(Integer stateId) {
+		this.stateId = stateId;
+	}
+
 	public Character getStatus() {
 		return status;
 	}
@@ -53,26 +106,30 @@ public class AssessmentBean {
 		this.status = status;
 	}
 
-	public Instant getCreatedDt() {
+	public LocalDateTime getCreatedDt() {
 		return createdDt;
 	}
 
-	public void setCreatedDt(Instant createdDt) {
+	public void setCreatedDt(LocalDateTime createdDt) {
 		this.createdDt = createdDt;
 	}
 
-	public Instant getModifiedDt() {
+	public LocalDateTime getModifiedDt() {
 		return modifiedDt;
 	}
 
-	public void setModifiedDt(Instant modifiedDt) {
+	public void setModifiedDt(LocalDateTime modifiedDt) {
 		this.modifiedDt = modifiedDt;
 	}
 
 	public void toBean(AssessmentEntity entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
-		this.duration = entity.getDuration();
+		this.age = entity.getAge();
+		this.address = entity.getAddress();
+		this.city = entity.getCity();
+		this.postcode = entity.getPostcode();
+		this.stateId = entity.getStateId();
 		this.status = entity.getStatus();
 		this.createdDt = entity.getCreatedDt();
 		this.modifiedDt = entity.getModifiedDt();

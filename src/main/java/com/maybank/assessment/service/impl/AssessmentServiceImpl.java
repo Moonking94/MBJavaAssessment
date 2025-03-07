@@ -1,6 +1,8 @@
 package com.maybank.assessment.service.impl;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
@@ -30,7 +32,28 @@ public class AssessmentServiceImpl extends AbstractService implements IAssessmen
 	
 	@Override
 	public BaseClassWrapper<AssessmentRespBean> searchAction(AssessmentReqBean wsReqBean) {
-		return null;
+		BaseClassWrapper<AssessmentRespBean> response = new BaseClassWrapper<AssessmentRespBean>();
+		
+		List<AssessmentBean> result = dao.search(wsReqBean).orElse(Collections.emptyList());
+		
+		AssessmentRespBean responseData = new AssessmentRespBean();
+		responseData.setSearchResults(result);
+		response.setResponseSuccess(responseData);
+		
+		return response;
+	}
+	
+	@Override
+	public BaseClassWrapper<AssessmentRespBean> searchCountAction(AssessmentReqBean wsReqBean) {
+		BaseClassWrapper<AssessmentRespBean> response = new BaseClassWrapper<AssessmentRespBean>();
+		
+		Long totalCount = dao.searchCount(wsReqBean).orElse(0L);
+		
+		AssessmentRespBean responseData = new AssessmentRespBean();
+		responseData.setTotalCount(totalCount);
+		response.setResponseSuccess(responseData);
+		
+		return response;
 	}
 	
 	@Override
@@ -54,8 +77,8 @@ public class AssessmentServiceImpl extends AbstractService implements IAssessmen
 			AssessmentEntity ent = new AssessmentEntity();
 			ent.toEntity(wsReqBean.getBean());
 			
-			ent.setCreatedDt(Instant.now());
-			
+			ent.setCreatedDt(LocalDateTime.now());
+	
 			ent = dao.saveAndFlush(ent);
 			dao.clearEntityManagerCache();
 			
@@ -98,7 +121,7 @@ public class AssessmentServiceImpl extends AbstractService implements IAssessmen
 	    updatedFields.forEach((key, value) -> setField(entRef.get(), key, value));
 
 	    AssessmentEntity ent = entRef.get();
-	    ent.setModifiedDt(Instant.now());
+	    ent.setModifiedDt(LocalDateTime.now());
 	    
 	    ent = dao.saveAndFlush(entRef.get());
         dao.clearEntityManagerCache();
