@@ -1,5 +1,6 @@
 package com.maybank.assessment.controller;
 
+import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -13,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.maybank.assessment.constant.Constants;
-import com.maybank.assessment.dto.AssessmentReqBean;
-import com.maybank.assessment.dto.AssessmentRespBean;
 import com.maybank.assessment.dto.BaseClassWrapper;
+import com.maybank.assessment.dto.assessment.AssessmentReqBean;
+import com.maybank.assessment.dto.assessment.AssessmentRespBean;
 import com.maybank.assessment.service.IAssessmentService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -56,14 +57,14 @@ public class AssessmentController {
 	* API for update
 	**/
 	@RequestMapping( value = { "updateAction/{id}" }, method = RequestMethod.PATCH)
-	public BaseClassWrapper<AssessmentRespBean> updateAction(@PathVariable Long id, @RequestBody AssessmentReqBean wsReqBean, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+	public BaseClassWrapper<AssessmentRespBean> updateAction(@PathVariable("id") Long id, @RequestBody Map<String, Object> updatedFields, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
 		
 		BaseClassWrapper<AssessmentRespBean> wsRespBean = new BaseClassWrapper<AssessmentRespBean>();
 		UUID uuid = UUID.randomUUID();
 		
-		logger.info((servletRequest.getServletPath() + " : [ID]").replace("ID", uuid.toString()) + " | " + Constants.FLAG_REQUEST.replace("[string]", gson.toJson(wsReqBean)));
+		logger.info((servletRequest.getServletPath() + " : [ID]").replace("ID", uuid.toString()) + " | " + Constants.FLAG_REQUEST.replace("[string]", gson.toJson(updatedFields)));
 		
-		wsRespBean = service.updateAction(id, wsReqBean);
+		wsRespBean = service.updateAction(id, updatedFields);
 		
 		logger.info((servletRequest.getServletPath() + " : [ID]").replace("ID", uuid.toString()) + " | " + Constants.FLAG_RESPONSE.replace("[string]", gson.toJson(wsRespBean)));
 		
@@ -74,14 +75,14 @@ public class AssessmentController {
 	* API for retrieve
 	**/
 	@RequestMapping( value = { "retrieveAction/{id}" }, method = RequestMethod.GET)
-	public BaseClassWrapper<AssessmentRespBean> retrieveAction(@PathVariable Long id, @RequestBody AssessmentReqBean wsReqBean, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+	public BaseClassWrapper<AssessmentRespBean> retrieveAction(@PathVariable("id") Long id, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
 		
 		BaseClassWrapper<AssessmentRespBean> wsRespBean = new BaseClassWrapper<AssessmentRespBean>();
 		UUID uuid = UUID.randomUUID();
 		
-		logger.info((servletRequest.getServletPath() + " : [ID]").replace("ID", uuid.toString()) + " | " + Constants.FLAG_REQUEST.replace("[string]", gson.toJson(wsReqBean)));
+		logger.info((servletRequest.getServletPath() + " : [ID]").replace("ID", uuid.toString()) + " | " + Constants.FLAG_REQUEST.replace("[string]", gson.toJson(id)));
 		
-		wsRespBean = service.retrieveAction(id, wsReqBean);
+		wsRespBean = service.retrieveAction(id);
 		
 		logger.info((servletRequest.getServletPath() + " : [ID]").replace("ID", uuid.toString()) + " | " + Constants.FLAG_RESPONSE.replace("[string]", gson.toJson(wsRespBean)));
 		
@@ -92,14 +93,14 @@ public class AssessmentController {
 	* API for delete
 	**/
 	@RequestMapping( value = { "deleteAction/{id}" }, method = RequestMethod.DELETE)
-	public BaseClassWrapper<AssessmentRespBean> deleteAction(@PathVariable Long id, @RequestBody AssessmentReqBean wsReqBean, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+	public BaseClassWrapper<AssessmentRespBean> deleteAction(@PathVariable("id") Long id, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
 		
 		BaseClassWrapper<AssessmentRespBean> wsRespBean = new BaseClassWrapper<AssessmentRespBean>();
 		UUID uuid = UUID.randomUUID();
 		
-		logger.info((servletRequest.getServletPath() + " : [ID]").replace("ID", uuid.toString()) + " | " + Constants.FLAG_REQUEST.replace("[string]", gson.toJson(wsReqBean)));
+		logger.info((servletRequest.getServletPath() + " : [ID]").replace("ID", uuid.toString()) + " | " + Constants.FLAG_REQUEST.replace("[string]", gson.toJson(id)));
 		
-		wsRespBean = service.deleteAction(id, wsReqBean);
+		wsRespBean = service.deleteAction(id);
 		
 		logger.info((servletRequest.getServletPath() + " : [ID]").replace("ID", uuid.toString()) + " | " + Constants.FLAG_RESPONSE.replace("[string]", gson.toJson(wsRespBean)));
 		

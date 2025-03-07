@@ -1,17 +1,21 @@
 package com.maybank.assessment.service;
 
-import com.maybank.assessment.dto.AssessmentReqBean;
-import com.maybank.assessment.dto.AssessmentRespBean;
+import java.util.Map;
+
 import com.maybank.assessment.dto.BaseClassWrapper;
+import com.maybank.assessment.dto.assessment.AssessmentReqBean;
+import com.maybank.assessment.dto.assessment.AssessmentRespBean;
 
 public interface IAssessmentService {
 
+	BaseClassWrapper<AssessmentRespBean> searchAction(AssessmentReqBean wsReqBean);
+	
 	BaseClassWrapper<AssessmentRespBean> createAction(AssessmentReqBean wsReqBean);
 	
-	BaseClassWrapper<AssessmentRespBean> updateAction(Long id, AssessmentReqBean wsReqBean);
+	BaseClassWrapper<AssessmentRespBean> updateAction(Long id, Map<String, Object> updatedFields);
 	
-	BaseClassWrapper<AssessmentRespBean> retrieveAction(Long id, AssessmentReqBean wsReqBean);
+	BaseClassWrapper<AssessmentRespBean> retrieveAction(Long id);
 	
-	BaseClassWrapper<AssessmentRespBean> deleteAction(Long id, AssessmentReqBean wsReqBean);
+	BaseClassWrapper<AssessmentRespBean> deleteAction(Long id);
 	
 }
