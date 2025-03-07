@@ -12,6 +12,8 @@ public class AssessmentBean {
 	
 	private Integer duration;
 	
+	private Character status;
+	
 	private Instant createdDt;
 	
 	private Instant modifiedDt;
@@ -43,6 +45,14 @@ public class AssessmentBean {
 		this.duration = duration;
 	}
 	
+	public Character getStatus() {
+		return status;
+	}
+
+	public void setStatus(Character status) {
+		this.status = status;
+	}
+
 	public Instant getCreatedDt() {
 		return createdDt;
 	}
@@ -63,6 +73,7 @@ public class AssessmentBean {
 		this.id = entity.getId();
 		this.name = entity.getName();
 		this.duration = entity.getDuration();
+		this.status = entity.getStatus();
 		this.createdDt = entity.getCreatedDt();
 		this.modifiedDt = entity.getModifiedDt();
 	}

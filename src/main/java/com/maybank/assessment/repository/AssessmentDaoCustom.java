@@ -12,6 +12,6 @@ public interface AssessmentDaoCustom {
 	
 	Optional<List<AssessmentBean>> search(AssessmentReqBean wsReqBean);
 	
-	Optional<List<AssessmentBean>> searchCount(AssessmentReqBean wsReqBean);
+	Optional<Long> searchCount(AssessmentReqBean wsReqBean);
 	
 }

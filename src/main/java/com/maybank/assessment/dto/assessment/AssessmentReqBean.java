@@ -4,9 +4,19 @@ import com.maybank.assessment.dto.AssessmentBean;
 
 public class AssessmentReqBean {
 
+	private AssessmentSearchBean searchBean = new AssessmentSearchBean();
+	
 	private AssessmentBean bean = new AssessmentBean();
 	
 	public AssessmentReqBean() {
+	}
+
+	public AssessmentSearchBean getSearchBean() {
+		return searchBean;
+	}
+
+	public void setSearchBean(AssessmentSearchBean searchBean) {
+		this.searchBean = searchBean;
 	}
 
 	public AssessmentBean getBean() {

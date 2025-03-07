@@ -39,7 +39,7 @@ public class AssessmentServiceImpl extends AbstractService implements IAssessmen
 		BaseClassWrapper<AssessmentRespBean> response = new BaseClassWrapper<AssessmentRespBean>();
 		
 		if(wsReqBean == null || wsReqBean.getBean() == null) {
-			response.setResponseError();
+			response.setResponseError("Empty request");
 			logger.info("Empty request");
 			
 			return response;
@@ -79,7 +79,7 @@ public class AssessmentServiceImpl extends AbstractService implements IAssessmen
 		BaseClassWrapper<AssessmentRespBean> response = new BaseClassWrapper<AssessmentRespBean>();
 		
 		if(id == null || updatedFields == null || updatedFields.isEmpty()) {
-			response.setResponseError();
+			response.setResponseError("Empty request");
 			logger.info("Empty request");
 			
 			return response;
@@ -116,14 +116,60 @@ public class AssessmentServiceImpl extends AbstractService implements IAssessmen
 
 	@Override
 	public BaseClassWrapper<AssessmentRespBean> retrieveAction(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		BaseClassWrapper<AssessmentRespBean> response = new BaseClassWrapper<AssessmentRespBean>();
+		
+		if(id == null) {
+			response.setResponseError("Empty request");
+			logger.info("Empty request");
+			
+			return response;
+		}
+		
+		Optional<AssessmentEntity> entOpt = dao.findById(id);
+		
+		if(entOpt.isEmpty()) {
+			response.setResponseError("Record not found");
+			logger.info("Record not found");
+			
+			return response;
+		}
+		
+		AssessmentEntity ent = entOpt.get();
+		AssessmentBean bean = new AssessmentBean();
+		bean.toBean(ent);
+		
+		AssessmentRespBean responseData = new AssessmentRespBean();
+		responseData.setBean(bean);
+		response.setResponseSuccess(responseData);
+		
+		return response;
 	}
 
 	@Override
 	public BaseClassWrapper<AssessmentRespBean> deleteAction(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		BaseClassWrapper<AssessmentRespBean> response = new BaseClassWrapper<AssessmentRespBean>();
+		
+		if(id == null) {
+			response.setResponseError("Empty request");
+			logger.info("Empty request");
+			
+			return response;
+		}
+		
+		Optional<AssessmentEntity> entOpt = dao.findById(id);
+		
+		if(entOpt.isEmpty()) {
+			response.setResponseError("Record not found");
+			logger.info("Record not found");
+			
+			return response;
+		}
+		
+		dao.deleteById(entOpt.get().getId());
+		
+		response.setResponseSuccess(null);
+		
+		return response;
 	}
 
 }

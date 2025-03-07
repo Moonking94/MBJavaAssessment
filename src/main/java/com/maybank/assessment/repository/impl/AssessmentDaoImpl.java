@@ -30,7 +30,7 @@ public class AssessmentDaoImpl extends AbstractDao implements AssessmentDaoCusto
 	}
 	
 	@Override
-	public Optional<List<AssessmentBean>> searchCount(AssessmentReqBean wsReqBean) {
+	public Optional<Long> searchCount(AssessmentReqBean wsReqBean) {
 		return null;
 	}
 	

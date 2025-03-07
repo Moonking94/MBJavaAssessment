@@ -4,15 +4,34 @@ import java.lang.reflect.Field;
 
 public class AbstractService {
 
-	protected void setField(Object entity, String fieldName, Object value) {
+	protected static <T> void setField(T entity, String key, Object value) {
         try {
-            Field field = entity.getClass().getDeclaredField(fieldName); // Get field dynamically
+            Field field = entity.getClass().getDeclaredField(key);
             field.setAccessible(true); // Allow modifying private fields
-            field.set(entity, value); // Set value (including null)
-        } catch (NoSuchFieldException e) {
-            throw new IllegalArgumentException("Field " + fieldName + " does not exist on entity " + entity.getClass().getSimpleName());
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException("Unable to update field " + fieldName, e);
+
+            Class<?> fieldType = field.getType();
+
+            if (fieldType.equals(Character.class) || fieldType.equals(char.class)) {
+                // Convert String to Character safely
+                if (value instanceof String && !((String) value).isEmpty()) {
+                    field.set(entity, ((String) value).charAt(0));
+                } else {
+                    field.set(entity, null);
+                }
+            } else if (fieldType.equals(Integer.class) || fieldType.equals(int.class)) {
+                field.set(entity, Integer.parseInt(value.toString()));
+            } else if (fieldType.equals(Long.class) || fieldType.equals(long.class)) {
+                field.set(entity, Long.parseLong(value.toString()));
+            } else if (fieldType.equals(Double.class) || fieldType.equals(double.class)) {
+                field.set(entity, Double.parseDouble(value.toString()));
+            } else if (fieldType.equals(Boolean.class) || fieldType.equals(boolean.class)) {
+                field.set(entity, Boolean.parseBoolean(value.toString()));
+            } else {
+                // Default case: Direct assignment
+                field.set(entity, value);
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace(); // Handle properly in production
         }
     }
 	

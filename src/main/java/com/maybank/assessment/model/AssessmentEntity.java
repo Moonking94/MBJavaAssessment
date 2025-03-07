@@ -15,11 +15,14 @@ public class AssessmentEntity {
 	@Column(name = "id")
     private Long id;
 	
-	@Column(name = "name")
+	@Column(name = "name", length = 150)
 	private String name;
 	
 	@Column(name = "duration")
 	private Integer duration;
+	
+	@Column(name = "status", length = 1)
+	private Character status;
 	
 	@Column(name = "created_dt")
 	private Instant createdDt;
@@ -54,6 +57,14 @@ public class AssessmentEntity {
 		this.duration = duration;
 	}
 
+	public Character getStatus() {
+		return status;
+	}
+
+	public void setStatus(Character status) {
+		this.status = status;
+	}
+
 	public Instant getCreatedDt() {
 		return createdDt;
 	}
@@ -74,6 +85,7 @@ public class AssessmentEntity {
 		this.id = bean.getId();
 		this.name = bean.getName();
 		this.duration = bean.getDuration();
+		this.status = bean.getStatus();
 		this.createdDt = bean.getCreatedDt();
 		this.modifiedDt = bean.getModifiedDt();
 	}

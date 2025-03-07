@@ -15,6 +15,14 @@ public class AssessmentRespBean {
 	public AssessmentRespBean() {
 	}
 
+	public AssessmentSearchBean getSearchBean() {
+		return searchBean;
+	}
+
+	public void setSearchBean(AssessmentSearchBean searchBean) {
+		this.searchBean = searchBean;
+	}
+
 	public AssessmentBean getBean() {
 		return bean;
 	}
