@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.maybank.assessment.dto.AssessmentBean;
 import com.maybank.assessment.dto.assessment.AssessmentReqBean;
+import com.maybank.assessment.dto.assessment.AssessmentRespBean;
 import com.maybank.assessment.dto.assessment.AssessmentSearchBean;
 import com.maybank.assessment.model.AssessmentEntity;
 import com.maybank.assessment.repository.AbstractDao;
@@ -33,7 +34,7 @@ public class AssessmentDaoImpl extends AbstractDao implements AssessmentDaoCusto
 	}
 	
 	@Override
-    public Optional<List<AssessmentBean>> search(AssessmentReqBean wsReqBean) {
+    public AssessmentRespBean search(AssessmentReqBean wsReqBean) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<AssessmentBean> query = cb.createQuery(AssessmentBean.class);
         Root<AssessmentEntity> root = query.from(AssessmentEntity.class);
@@ -63,11 +64,15 @@ public class AssessmentDaoImpl extends AbstractDao implements AssessmentDaoCusto
         typedQuery.setMaxResults(rowPerPage);
 
         List<AssessmentBean> resultList = typedQuery.getResultList();
-        return Optional.of(resultList);
+        
+        AssessmentRespBean responseData = new AssessmentRespBean();
+        responseData.setSearchResults(resultList);
+        responseData.setTotalCount(searchCount(wsReqBean).orElse(0L));
+        
+        return responseData;
     }
-
-    @Override
-    public Optional<Long> searchCount(AssessmentReqBean wsReqBean) {
+	
+    private Optional<Long> searchCount(AssessmentReqBean wsReqBean) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
         Root<AssessmentEntity> root = countQuery.from(AssessmentEntity.class);

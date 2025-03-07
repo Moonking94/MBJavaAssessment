@@ -34,23 +34,8 @@ public class AssessmentServiceImpl extends AbstractService implements IAssessmen
 	public BaseClassWrapper<AssessmentRespBean> searchAction(AssessmentReqBean wsReqBean) {
 		BaseClassWrapper<AssessmentRespBean> response = new BaseClassWrapper<AssessmentRespBean>();
 		
-		List<AssessmentBean> result = dao.search(wsReqBean).orElse(Collections.emptyList());
+		AssessmentRespBean responseData = dao.search(wsReqBean);
 		
-		AssessmentRespBean responseData = new AssessmentRespBean();
-		responseData.setSearchResults(result);
-		response.setResponseSuccess(responseData);
-		
-		return response;
-	}
-	
-	@Override
-	public BaseClassWrapper<AssessmentRespBean> searchCountAction(AssessmentReqBean wsReqBean) {
-		BaseClassWrapper<AssessmentRespBean> response = new BaseClassWrapper<AssessmentRespBean>();
-		
-		Long totalCount = dao.searchCount(wsReqBean).orElse(0L);
-		
-		AssessmentRespBean responseData = new AssessmentRespBean();
-		responseData.setTotalCount(totalCount);
 		response.setResponseSuccess(responseData);
 		
 		return response;

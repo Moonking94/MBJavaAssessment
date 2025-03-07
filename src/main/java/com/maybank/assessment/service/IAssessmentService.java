@@ -10,8 +10,6 @@ public interface IAssessmentService {
 
 	BaseClassWrapper<AssessmentRespBean> searchAction(AssessmentReqBean wsReqBean);
 	
-	BaseClassWrapper<AssessmentRespBean> searchCountAction(AssessmentReqBean wsReqBean);
-	
 	BaseClassWrapper<AssessmentRespBean> createAction(AssessmentReqBean wsReqBean);
 	
 	BaseClassWrapper<AssessmentRespBean> updateAction(Long id, Map<String, Object> updatedFields);
