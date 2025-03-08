@@ -22,6 +22,9 @@ public class AssessmentEntity {
 	@Column(name = "id")
     private Long id;
 	
+	@Column(name = "email", length = 255)
+	private String email;
+	
 	@Column(name = "name", length = 150)
 	private String name;
 	
@@ -60,6 +63,14 @@ public class AssessmentEntity {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getName() {
@@ -137,6 +148,7 @@ public class AssessmentEntity {
 	public void toEntity(AssessmentBean bean) {
 		this.id = bean.getId();
 		this.name = bean.getName();
+		this.email = bean.getEmail();
 		this.age = bean.getAge();
 		this.address = bean.getAddress();
 		this.city = bean.getCity();

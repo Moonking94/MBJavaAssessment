@@ -13,6 +13,9 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.maybank.assessment.api.ApiServices;
+import com.maybank.assessment.api.dto.UserBean;
+import com.maybank.assessment.api.dto.UserRespBean;
 import com.maybank.assessment.constant.Constants;
 import com.maybank.assessment.dto.AssessmentBean;
 import com.maybank.assessment.dto.BaseClassWrapper;
@@ -31,6 +34,8 @@ public class AssessmentServiceImpl extends AbstractService implements IAssessmen
 	@Autowired private AssessmentDao dao;
 	
 	@Autowired private MessageSource messageSource;
+	
+	@Autowired private ApiServices apiServices;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -55,10 +60,41 @@ public class AssessmentServiceImpl extends AbstractService implements IAssessmen
 			logger.info(response.getResponseMessage());
 			
 			return response;
-		} else if(wsReqBean.getBean().getId() != null) {
+		}
+		
+		AssessmentBean bean = wsReqBean.getBean();
+		
+		if(bean.getId() != null) {
 			response.setResponseError(messageSource.getMessage(Constants.ERROR_BAD_REQUEST, null, LocaleContextHolder.getLocale()));
 			logger.info(response.getResponseMessage());
 			
+			return response;
+		} else if(bean.getEmail() == null) {
+			response.setResponseError(messageSource.getMessage(Constants.ERROR_BAD_REQUEST, null, LocaleContextHolder.getLocale()));
+			logger.info(response.getResponseMessage());
+			
+			return response;
+		}
+		
+		// get user info by email from another API
+		try {
+			UserRespBean userBean = apiServices.getUserByEmail(bean.getEmail());
+			
+			if(userBean == null) {
+				response.setResponseError(messageSource.getMessage(Constants.ERROR_INVALID_EMAIL, null, LocaleContextHolder.getLocale()));
+				logger.info(response.getResponseMessage());
+				
+				return response;
+			}
+			
+			UserBean user = userBean.getBean();
+			
+			bean.setName(user.getName());
+			bean.setAge(user.getAge());
+			
+		} catch (Exception e) {
+			logger.error("Error while getting user :: ", e);
+			response.setResponseError(e.getMessage());
 			return response;
 		}
 		
@@ -72,15 +108,16 @@ public class AssessmentServiceImpl extends AbstractService implements IAssessmen
 			dao.clearEntityManagerCache();
 			
 			ent = dao.findById(ent.getId()).get();
-			AssessmentBean bean = new AssessmentBean();
-			bean.toBean(ent);
+			AssessmentBean tmpBean = new AssessmentBean();
+			tmpBean.toBean(ent);
 			
 			AssessmentRespBean responseData = new AssessmentRespBean();
-			responseData.setBean(bean);
+			responseData.setBean(tmpBean);
 			response.setResponseSuccess(messageSource, responseData);
 		} catch(Exception e) {
 			logger.error("Error while saving :: ", e);
 			response.setResponseError(e.getMessage());
+			return response;
 		}
 		
 		return response;

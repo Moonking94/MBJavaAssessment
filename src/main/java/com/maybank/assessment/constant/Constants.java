@@ -12,5 +12,6 @@ public class Constants {
 	public static final String ERROR_EMPTY_REQUEST = "error.empty_request";
 	public static final String ERROR_BAD_REQUEST = "error.bad_request";
 	public static final String ERROR_RECORD_NOT_FOUND = "error.record_not_found";
+	public static final String ERROR_INVALID_EMAIL = "error.invalid_email";
 			
 }

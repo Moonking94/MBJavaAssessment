@@ -7,6 +7,8 @@ import com.maybank.assessment.model.AssessmentEntity;
 public class AssessmentBean {
 
 	private Long id;
+
+	private String email;
 	
 	private String name;
 	
@@ -29,8 +31,9 @@ public class AssessmentBean {
 	public AssessmentBean() {
 	}
 
-	public AssessmentBean(Long id, String name, Integer age, String address, String city, String postcode, Integer stateId, Character status, LocalDateTime createdDt, LocalDateTime modifiedDt) {
+	public AssessmentBean(Long id, String email, String name, Integer age, String address, String city, String postcode, Integer stateId, Character status, LocalDateTime createdDt, LocalDateTime modifiedDt) {
         this.id = id;
+        this.email = email;
         this.name = name;
         this.age = age;
         this.address = address;
@@ -48,6 +51,14 @@ public class AssessmentBean {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getName() {
@@ -124,6 +135,7 @@ public class AssessmentBean {
 
 	public void toBean(AssessmentEntity entity) {
 		this.id = entity.getId();
+		this.email = entity.getEmail();
 		this.name = entity.getName();
 		this.age = entity.getAge();
 		this.address = entity.getAddress();
