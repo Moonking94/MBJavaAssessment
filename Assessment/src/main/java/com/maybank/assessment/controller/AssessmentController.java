@@ -44,6 +44,7 @@ public class AssessmentController {
 	**/
 	@RequestMapping( value = { "searchAction" }, method = RequestMethod.GET)
 	public BaseClassWrapper<AssessmentRespBean> searchAction(
+			@RequestParam(required = false, name = "email") String email,
 		    @RequestParam(required = false, name = "name") String name,
 		    @RequestParam(required = false, name = "age") Integer age,
 		    @RequestParam(required = false, name = "address") String address,
@@ -63,6 +64,7 @@ public class AssessmentController {
 		AssessmentSearchBean searchBean = new AssessmentSearchBean();
 	    AssessmentBean parameterBean = new AssessmentBean();
 
+	    parameterBean.setEmail(email);
 	    parameterBean.setName(name);
 	    parameterBean.setAge(age);
 	    parameterBean.setAddress(address);

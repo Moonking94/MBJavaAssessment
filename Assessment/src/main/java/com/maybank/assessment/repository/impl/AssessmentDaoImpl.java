@@ -44,6 +44,7 @@ public class AssessmentDaoImpl extends AbstractDao implements AssessmentDaoCusto
         query.select(cb.construct(
                 AssessmentBean.class,
                 root.get("id"),
+                root.get("email"),
                 root.get("name"),
                 root.get("age"),
                 root.get("address"),
@@ -87,6 +88,9 @@ public class AssessmentDaoImpl extends AbstractDao implements AssessmentDaoCusto
 	private List<Predicate> buildPredicates(CriteriaBuilder cb, Root<AssessmentEntity> root, AssessmentSearchBean searchParam) {
         List<Predicate> predicates = new ArrayList<>();
 
+        if (searchParam.getParameterBean().getEmail() != null) {
+            predicates.add(cb.like(cb.lower(root.get("email")), "%" + searchParam.getParameterBean().getEmail().toLowerCase() + "%"));
+        }
         if (searchParam.getParameterBean().getName() != null) {
             predicates.add(cb.like(cb.lower(root.get("name")), "%" + searchParam.getParameterBean().getName().toLowerCase() + "%"));
         }
