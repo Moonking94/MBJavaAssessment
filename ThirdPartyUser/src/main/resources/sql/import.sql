@@ -1,0 +1,22 @@
+INSERT INTO thirdparty.user (email, name, age, status, created_dt, modified_dt) VALUES
+('john.doe@example.com', 'John Doe', 30, 'A', '2024-01-01 10:15:00', '2024-01-02 12:00:00'),
+('jane.smith@example.com', 'Jane Smith', 25, 'A', '2024-02-10 09:30:00', '2024-02-11 14:20:00'),
+('alice.brown@example.com', 'Alice Brown', 35, 'I', '2024-03-05 08:45:00', '2024-03-06 10:10:00'),
+('robert.jones@example.com', 'Robert Jones', 40, 'A', '2024-04-15 07:20:00', '2024-04-16 11:05:00'),
+('emily.watson@example.com', 'Emily Watson', 28, 'A', '2024-05-22 15:00:00', '2024-05-23 16:30:00'),
+('michael.clark@example.com', 'Michael Clark', 32, 'I', '2024-06-18 12:25:00', '2024-06-19 13:50:00'),
+('sarah.lee@example.com', 'Sarah Lee', 27, 'A', '2024-07-03 14:10:00', '2024-07-04 09:40:00'),
+('david.harris@example.com', 'David Harris', 45, 'A', '2024-08-10 10:00:00', '2024-08-11 15:00:00'),
+('laura.evans@example.com', 'Laura Evans', 23, 'I', '2024-09-17 11:30:00', '2024-09-18 18:45:00'),
+('william.white@example.com', 'William White', 38, 'A', '2024-10-21 08:15:00', '2024-10-22 17:30:00'),
+('olivia.martin@example.com', 'Olivia Martin', 31, 'A', '2024-11-12 14:20:00', '2024-11-13 13:10:00'),
+('daniel.thomas@example.com', 'Daniel Thomas', 29, 'I', '2024-12-01 10:30:00', '2024-12-02 11:45:00'),
+('hannah.rogers@example.com', 'Hannah Rogers', 33, 'A', '2025-01-08 07:45:00', '2025-01-09 16:20:00'),
+('jackson.carter@example.com', 'Jackson Carter', 26, 'A', '2025-02-14 09:50:00', '2025-02-15 12:30:00'),
+('victoria.adams@example.com', 'Victoria Adams', 41, 'I', '2025-03-20 13:35:00', '2025-03-21 14:55:00'),
+('ryan.scott@example.com', 'Ryan Scott', 22, 'A', '2025-04-25 08:00:00', '2025-04-26 09:25:00'),
+('sophia.morris@example.com', 'Sophia Morris', 36, 'A', '2025-05-30 11:10:00', '2025-05-31 17:15:00'),
+('ethan.lee@example.com', 'Ethan Lee', 34, 'I', '2025-06-18 07:20:00', '2025-06-19 08:40:00'),
+('madison.taylor@example.com', 'Madison Taylor', 39, 'A', '2025-07-02 15:45:00', '2025-07-03 16:50:00'),
+('benjamin.roberts@example.com', 'Benjamin Roberts', 24, 'A', '2025-08-19 10:00:00', '2025-08-20 11:30:00')
+ON CONFLICT (email) DO NOTHING;
